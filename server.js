@@ -4,11 +4,13 @@ const cors = require('cors');
 const mongoose= require('mongoose');
 const routes = require('./routes/routes');
 const path = require('path');
+const morgan = require('morgan');
 
 const PORT = process.env.PORT || 5000;
 const server = express();
 server.use(express.json());
 server.use(cors());
+server.use(morgan("combined"));
 server.use(express.static(path.join(__dirname, "client", "build")));
 
 
@@ -29,3 +31,5 @@ server.listen(PORT, err => {
     console.log(`Server is running.`);
   }
 });
+
+module.exports = server;
